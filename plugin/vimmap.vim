@@ -11,8 +11,6 @@ endfunction
 " *****************************************************************************************************
                                   " MyKeyMapper 
                                   " *******************************************************************
-let g:MyKeyList = []
-let g:MyValueList = []
 let g:MyKeyDict = {} 
 let g:MyKeyDictCT = 1000 
 let g:MyKeyMapperMode = "" 
