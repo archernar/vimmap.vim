@@ -11,9 +11,6 @@ endfunction
 " *****************************************************************************************************
                                   " MyKeyMapper 
                                   " *******************************************************************
-let g:MyKeyDict = {} 
-let g:MyKeyDictCT = 1000 
-let g:MyKeyMapperMode = "" 
 function! g:SetMyKeyMapperMode(...)
      let g:MyKeyMapperMode = substitute(a:1, " .*$", "", "g") . " "
 endfunction
