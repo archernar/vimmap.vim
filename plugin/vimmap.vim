@@ -20,11 +20,7 @@ function! g:GetMyKeyMapperMode(...)
      endif
     return g:MyKeyMapperMode
 endfunction
-function! MyTest()
-     let l:szKey = "abcd-no"
-     let l:szKey = substitute(l:szKey, "^[cga]", "X", "")
-     echom l:szKey
-endfunction
+
 function! g:MyKeyMapper(...)
      let l:szKey = substitute(a:1,     "<silent> ", "", "")
      let l:szKey = substitute(l:szKey, "nnoremap ", "", "")
@@ -81,7 +77,7 @@ function! MyKeyMapperDumpSeek()
 endfunction
 
 " MYKEYMAPPERDUMP
-function! MyKeyMapperDump(...)
+function! s:MyKeyMapperDump(...)
         call LeftWindowBuffer()
         setlocal cursorline
         nnoremap <silent> <buffer> q :close<cr>
