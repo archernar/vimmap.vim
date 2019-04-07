@@ -77,7 +77,7 @@ function! MyKeyMapperDumpSeek()
 endfunction
 
 " MYKEYMAPPERDUMP
-function! s:MyKeyMapperDump(...)
+function! MyKeyMapperDump(...)
         call LeftWindowBuffer()
         setlocal cursorline
         nnoremap <silent> <buffer> q :close<cr>
