@@ -86,7 +86,8 @@ function! KMD(...)
         nnoremap <silent> <buffer> s  :call MyKeyMapperDumpSeek()<cr>
         let l:nn=1
   	for key in sort(keys(g:MyKeyDict))
-                      call setline(l:nn, g:MyKeyDict[key] . "    [[    |" .  key)
+"                       call setline(l:nn, g:MyKeyDict[key] . "    [[    |" .  key)
+                      call setline(l:nn, key)
                       let l:nn= l:nn + 1
   	endfor
 endfunction
