@@ -76,6 +76,21 @@ function! MyKeyMapperDumpSeek()
      normal! zt 
 endfunction
 
+function! KMD(...)
+        call LeftWindowBuffer()
+        setlocal cursorline
+        nnoremap <silent> <buffer> q :close<cr>
+        nnoremap <silent> <buffer> ? :close<cr>
+        nnoremap <silent> <buffer> <F8>  :call MyKeyMapperDumpSeek()<cr>
+        nnoremap <silent> <buffer> <leader><F8>  :close<cr>
+        nnoremap <silent> <buffer> s  :call MyKeyMapperDumpSeek()<cr>
+        let l:nn=1
+  	for key in sort(keys(g:MyKeyDict))
+                      call setline(l:nn, g:MyKeyDict[key] . "    [[    |" .  key)
+                      let l:nn= l:nn + 1
+  	endfor
+endfunction
+
 " MYKEYMAPPERDUMP
 function! MyKeyMapperDump(...)
         call LeftWindowBuffer()
@@ -105,6 +120,9 @@ function! MyKeyMapperDump(...)
               let l:ntemp2 = l:n
           endif
 	endfor
+
+
+
         let l:ntemp = l:ntemp + 1
         let l:ntemp2 = l:ntemp2 + 1
 	for key in sort(keys(g:MyKeyDict))
