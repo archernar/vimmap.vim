@@ -86,7 +86,6 @@ function! MyKeyMapperDump(...)
         nnoremap <silent> <buffer> <leader><F8>  :close<cr>
         nnoremap <silent> <buffer> s  :call MyKeyMapperDumpSeek()<cr>
         let l:nn=1
-        echo "MPMMP"
 "  	for key in sort(keys(g:MyKeyDict))
 "                      call setline(l:nn, g:MyKeyDict[key] . "    [[    |" .  key)
 "                      let l:nn= l:nn + 1
