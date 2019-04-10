@@ -108,7 +108,7 @@ function! MyKeyMapperDump(...)
 	for key in keys(g:MyKeyDict)
           let l:list = split(key)
 
-          let l:n = strlen(join(l:list[0:0], ''))   " section
+          let l:n = strlen(join(l:list[0:0], ''))
           if (l:n > l:ntemp)
               let l:ntemp = l:n
           endif
@@ -118,22 +118,15 @@ function! MyKeyMapperDump(...)
           endif
 	endfor
 
-
-
         let l:ntemp = l:ntemp + 1
         let l:ntemp2 = l:ntemp2 + 1
 	for key in sort(keys(g:MyKeyDict))
           let l:list = split(key)
-          let l:section = l:list[0:0]
-          let l:number = l:list[1:1]
-          let l:punch = l:list[2:2]
-          let l:number = l:list[2:2]
-          let l:punch = l:list[1:1]
-          let l:linemod = g:MyKeyDict[key]
-          let l:sz = Pad(join(l:section, ''), l:ntemp) .  Pad(join(l:punch, ''),l:ntemp2) . l:linemod
+          let l:punch   = l:list[1:1]
+          let l:sz      = Pad(join(l:list[0:0], ''), l:ntemp) .  Pad(join(l:punch, ''),l:ntemp2) . g:MyKeyDict[key]
 
           if ( a:0 == 1)
-               if ( l:section == a:1)
+               if ( l:list[0:0] == a:1)
                     call setline(l:nn, l:line . "")
                     let l:nn= l:nn + 1
           endif
