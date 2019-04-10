@@ -98,16 +98,10 @@ function! MyKeyMapperDump(...)
         nnoremap <silent> <buffer> <leader><F8>  :close<cr>
         nnoremap <silent> <buffer> s  :call MyKeyMapperDumpSeek()<cr>
         let l:nn=1
-"  	for key in sort(keys(g:MyKeyDict))
-"                      call setline(l:nn, g:MyKeyDict[key] . "    [[    |" .  key)
-"                      let l:nn= l:nn + 1
-"  	endfor
         let l:ntemp=0
         let l:ntemp2=0
-	"for key in sort(keys(g:MyKeyDict))
 	for key in keys(g:MyKeyDict)
           let l:list = split(key)
-
           let l:n = strlen(join(l:list[0:0], ''))
           if (l:n > l:ntemp)
               let l:ntemp = l:n
