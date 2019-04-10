@@ -18,7 +18,10 @@ function! g:GetMyKeyMapperMode(...)
      if ( g:MyKeyMapperMode == "")
           call g:SetMyKeyMapperMode("STD")
      endif
-    return g:MyKeyMapperMode
+    let l:temp = g:MyKeyMapperMode
+    let l:temp = substitute(l:temp, " *$", "", "g")
+    let l:temp = substitute(l:temp, "^ *", "", "g")
+    return l:temp . " "
 endfunction
 
 function! g:MyKeyMapper(...)
@@ -27,11 +30,9 @@ function! g:MyKeyMapper(...)
      let l:szKey = substitute(l:szKey, "vnoremap ", "", "")
      let l:szKey = substitute(l:szKey, "inoremap ", "", "")
      let l:szKey = substitute(l:szKey, " .*$", "", "g")
-     " let l:prefix= g:MyKeyMapperMode . " " . g:MyKeyDictCT 
-     let l:prefix= g:GetMyKeyMapperMode() . " " . g:MyKeyDictCT 
 
+     let g:MyKeyDict[ g:GetMyKeyMapperMode() . l:szKey ] = a:2
      let g:MyKeyDictCT = g:MyKeyDictCT +1
-     let g:MyKeyDict[l:prefix . " " . l:szKey] = a:2
      execute a:1
 endfunction
 
@@ -41,18 +42,13 @@ function! g:MyCommandMapper(...)
      let l:szCommand = substitute(l:szCommand, '^[A-Z,0-9]*[ ]*',"", "")
      let l:szKey     = substitute(a:1, "command! ", "", "")
      let l:szKey     = substitute(l:szKey, " .*$", "", "g")
-
-     let l:prefix = g:GetMyKeyMapperMode() . " " . g:MyKeyDictCT 
+     let g:MyKeyDict[g:GetMyKeyMapperMode() . l:szKey] = l:szCommand 
      let g:MyKeyDictCT = g:MyKeyDictCT + 1
-
-     let g:MyKeyDict[l:prefix . " " . l:szKey] = l:szCommand 
-
      execute a:1
 endfunction
 function! g:MyStaticMapper(...)
-     let l:prefix = g:GetMyKeyMapperMode() . " " . g:MyKeyDictCT 
-     let g:MyKeyDictCT = g:MyKeyDictCT +1
-     let g:MyKeyDict[l:prefix . " " . a:1] = a:2
+     let g:MyKeyDict[g:GetMyKeyMapperMode() . a:1] = a:2
+     let g:MyKeyDictCT         = g:MyKeyDictCT +1
 endfunction
 function! MyKeyMapperDumpSeek()
 "    zt puts current line to top of screen
@@ -116,7 +112,7 @@ function! MyKeyMapperDump(...)
           if (l:n > l:ntemp)
               let l:ntemp = l:n
           endif
-          let l:n = strlen(join(l:list[2:2], ''))   " punch
+          let l:n = strlen(join(l:list[1:1], ''))   " punch
           if (l:n > l:ntemp2)
               let l:ntemp2 = l:n
           endif
@@ -131,6 +127,8 @@ function! MyKeyMapperDump(...)
           let l:section = l:list[0:0]
           let l:number = l:list[1:1]
           let l:punch = l:list[2:2]
+          let l:number = l:list[2:2]
+          let l:punch = l:list[1:1]
           let l:linemod = g:MyKeyDict[key]
           let l:sz = Pad(join(l:section, ''), l:ntemp) .  Pad(join(l:punch, ''),l:ntemp2) . l:linemod
 
