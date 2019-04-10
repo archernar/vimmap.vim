@@ -112,7 +112,7 @@ function! MyKeyMapperDump(...)
           if (l:n > l:ntemp)
               let l:ntemp = l:n
           endif
-          let l:n = strlen(join(l:list[1:1], ''))   " punch
+          let l:n = strlen(join(l:list[1:1], ''))
           if (l:n > l:ntemp2)
               let l:ntemp2 = l:n
           endif
@@ -122,8 +122,7 @@ function! MyKeyMapperDump(...)
         let l:ntemp2 = l:ntemp2 + 1
 	for key in sort(keys(g:MyKeyDict))
           let l:list = split(key)
-          let l:punch   = l:list[1:1]
-          let l:sz      = Pad(join(l:list[0:0], ''), l:ntemp) .  Pad(join(l:punch, ''),l:ntemp2) . g:MyKeyDict[key]
+          let l:sz      = Pad(join(l:list[0:0],''), l:ntemp) .  Pad(join(l:list[1:1],''),l:ntemp2) . g:MyKeyDict[key]
 
           if ( a:0 == 1)
                if ( l:list[0:0] == a:1)
