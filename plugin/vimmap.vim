@@ -4,6 +4,16 @@
 function! s:Pad(s,amt)
         return a:s . repeat(' ',a:amt - len(a:s))
 endfunction
+function! TrimLeft(s1)
+     return substitute(a:s1, "^ *", "", "")
+endfunction
+function! TrimRight(s1)
+     return substitute(l:szPart, " *$", "", "")
+endfunction
+function! Trim(s1)
+     let l:szPart = substitute(a:s1, "^ *", "", "")
+     return substitute(l:szPart, " *$", "", "")
+endfunction
 
                                   " *******************************************************************
                                   " END: Utility Functions
@@ -70,22 +80,6 @@ function! MyKeyMapperDumpSeek()
           endif
      endwhile
      normal! zt 
-endfunction
-
-function! KMD(...)
-        call LeftWindowBuffer()
-        setlocal cursorline
-        nnoremap <silent> <buffer> q :close<cr>
-        nnoremap <silent> <buffer> ? :close<cr>
-        nnoremap <silent> <buffer> <F8>  :call MyKeyMapperDumpSeek()<cr>
-        nnoremap <silent> <buffer> <leader><F8>  :close<cr>
-        nnoremap <silent> <buffer> s  :call MyKeyMapperDumpSeek()<cr>
-        let l:nn=1
-  	for key in sort(keys(g:MyKeyDict))
-"                       call setline(l:nn, g:MyKeyDict[key] . "    [[    |" .  key)
-                      call setline(l:nn, key)
-                      let l:nn= l:nn + 1
-  	endfor
 endfunction
 
 " MYKEYMAPPERDUMP
