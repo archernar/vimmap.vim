@@ -4,13 +4,13 @@
 function! s:Pad(s,amt)
         return a:s . repeat(' ',a:amt - len(a:s))
 endfunction
-function! TrimLeft(s1)
+function! s:TrimLeft(s1)
      return substitute(a:s1, "^ *", "", "")
 endfunction
-function! TrimRight(s1)
+function! s:TrimRight(s1)
      return substitute(l:szPart, " *$", "", "")
 endfunction
-function! Trim(s1)
+function! s:Trim(s1)
      let l:szPart = substitute(a:s1, "^ *", "", "")
      return substitute(l:szPart, " *$", "", "")
 endfunction
