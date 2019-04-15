@@ -4,15 +4,8 @@
 function! s:Pad(s,amt)
         return a:s . repeat(' ',a:amt - len(a:s))
 endfunction
-function! s:TrimLeft(s1)
-     return substitute(a:s1, "^ *", "", "")
-endfunction
-function! s:TrimRight(s1)
-     return substitute(l:szPart, " *$", "", "")
-endfunction
 function! s:Trim(s1)
-     let l:szPart = substitute(a:s1, "^ *", "", "")
-     return substitute(l:szPart, " *$", "", "")
+     return substitute( substitute(a:s1, "^ *", "", "")        , " *$", "", "")
 endfunction
 
                                   " *******************************************************************
@@ -22,16 +15,13 @@ endfunction
                                   " MyKeyMapper 
                                   " *******************************************************************
 function! g:SetMyKeyMapperMode(...)
-     let g:MyKeyMapperMode = substitute(a:1, " .*$", "", "g") . " "
+     let g:MyKeyMapperMode = s:Trim(a:1)
 endfunction
 function! g:GetMyKeyMapperMode(...)
      if ( g:MyKeyMapperMode == "")
           call g:SetMyKeyMapperMode("STD")
      endif
-    let l:temp = g:MyKeyMapperMode
-    let l:temp = substitute(l:temp, " *$", "", "g")
-    let l:temp = substitute(l:temp, "^ *", "", "g")
-    return l:temp . " "
+    return s:Trim(g:MyKeyMapperMode) . " "
 endfunction
 
 function! g:MyKeyMapper(...)
@@ -80,6 +70,15 @@ function! MyKeyMapperDumpSeek()
           endif
      endwhile
      normal! zt 
+endfunction
+
+function! MKDE()
+          let l:currentLine   = getline(".")
+          let l:list = split(l:currentLine)
+          let l:sz = join(l:list[2:32], ' ')
+          echom join(l:list[2:32], ' ')
+          silent execute "q"
+          silent execute l:sz
 endfunction
 
 " MYKEYMAPPERDUMP
@@ -143,6 +142,7 @@ function! LeftWindowBuffer(...)
         let s:buf_nr = bufnr('%')
         setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
         nnoremap <silent> <buffer> q :close<cr>
+        nnoremap <silent> <buffer> h :call BottomWindowBuffer("(q)uit/close, (h)elp")<cr>
     elseif bufwinnr(s:buf_nr) == -1
         vnew
         silent execute s:buf_nr . 'buffer'
@@ -164,3 +164,22 @@ function! LeftWindowBuffer(...)
     call cursor(1, 1)
 endfunction
 
+" *****************************************************************************************************
+                                  " Bottom Window-Buffer Functions
+                                  " *******************************************************************
+function! BWB(...) 
+call  BottomWindowBuffer()
+endfunction
+function! BottomWindowBuffer(...)
+        belowright new
+        let s:buf_nr = bufnr('%')
+        setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
+        nnoremap <silent> <buffer> q :close<cr>
+        nnoremap <silent> <buffer> h :close<cr>
+        resize 4
+        set nonumber
+        if (a:0 > 0)
+             let l:nn = 1
+             call setline(l:nn, a:1)
+        endif
+endfunction
