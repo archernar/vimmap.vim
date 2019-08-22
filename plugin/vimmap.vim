@@ -61,9 +61,22 @@ function! MyKeyMapperDumpSeek()
      normal! G
      let l:There = line(".")
      call cursor(l:Here, 1)
-     while ( (l:nn < l:There) && (wuc ==  expand("<cword>")) )
+     let l:nnl=0
+     let l:break=0
+     while ( (l:nn < l:There) && (wuc ==  expand("<cword>")) && (l:break==0)  )
           execute "normal j"
           let l:nn= l:nn + 1
+
+
+          if (1 > 12) 
+          let l:nnl= l:nnl + 1
+          if (l:nnl > 12) 
+             let l:break=1
+             call cursor(l:nn, 1)
+             normal! zt 
+          endif
+          endif
+
           if (l:nn >= l:There) 
                let l:nn=1
                call cursor(1, 1)
@@ -82,8 +95,23 @@ function! MKDE()
 endfunction
 
 " MYKEYMAPPERDUMP
+function! KeyMapperEnterAction()
+     let l:currentLine   = getline(".")
+     "echom currentLine
+     if (empty(matchstr(currentLine,'\v^SNIP')))
+         echom "Not a Snippet"
+     else
+         let l:currentLine = substitute(l:currentLine, '^[A-Z,0-9]*[ ]*',"", "")
+         let l:currentLine = substitute(l:currentLine, '^[A-Z,0-9]*[ ]*',"", "")
+         let l:currentLine = substitute(l:currentLine, '^[ ]*',"", "")
+         let l:currentLine = substitute(l:currentLine, '^:',"", "")
+         silent execute "q"
+         silent execute l:currentLine
+         " execute "redraw!"
+     endif
+endfunction
 function! MyKeyMapperDump(...)
-        call LeftWindowBuffer()
+        call LeftWindowBuffer(":call KeyMapperEnterAction()<cr>")
         setlocal cursorline
         nnoremap <silent> <buffer> q :close<cr>
         nnoremap <silent> <buffer> ? :close<cr>
@@ -122,7 +150,7 @@ function! MyKeyMapperDump(...)
           endif
 	endfor
         wincmd H
-        vertical resize 80 
+        vertical resize 100 
         set nowrap
 "         setlocal readonly nomodifiable
         echom ""
@@ -142,7 +170,7 @@ function! LeftWindowBuffer(...)
         let s:buf_nr = bufnr('%')
         setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
         nnoremap <silent> <buffer> q :close<cr>
-        nnoremap <silent> <buffer> h :call BottomWindowBuffer("(q)uit/close, (h)elp")<cr>
+        nnoremap <silent> <buffer> h :call BottomWindowBuffer("(q)uit/close, (h)elp", "Moe")<cr>
     elseif bufwinnr(s:buf_nr) == -1
         vnew
         silent execute s:buf_nr . 'buffer'
@@ -158,7 +186,7 @@ function! LeftWindowBuffer(...)
     call cursor(1, 1)
     execute "normal! gg"
     execute "normal! dG"
-    if ( a:0 > 0)
+    if ( a:0 > 1)
          execute a:2
     endif
     call cursor(1, 1)
@@ -178,8 +206,11 @@ function! BottomWindowBuffer(...)
         nnoremap <silent> <buffer> h :close<cr>
         resize 4
         set nonumber
-        if (a:0 > 0)
-             let l:nn = 1
-             call setline(l:nn, a:1)
+        if (a:0  > 0)
+            let l:nn = 1
+            while (l:nn <= a:0 )
+                 call setline(l:nn, get(a:000,l:nn-1) )
+                 let l:nn= l:nn + 1
+            endwhile
         endif
 endfunction
