@@ -110,6 +110,14 @@ function! KeyMapperEnterAction()
          " execute "redraw!"
      endif
 endfunction
+
+function! MyKeyMapperEmpty(...)
+    for l:key in keys(g:MyKeyDict)
+        let l:removed = remove(g:MyKeyDict, l:key)
+    endfor
+endfunction
+
+
 function! MyKeyMapperDump(...)
         call LeftWindowBuffer(":call KeyMapperEnterAction()<cr>")
         setlocal cursorline
