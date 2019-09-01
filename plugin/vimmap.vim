@@ -97,9 +97,9 @@ endfunction
 " MYKEYMAPPERDUMP
 function! KeyMapperEnterAction()
      let l:currentLine   = getline(".")
-     "echom currentLine
-     if (empty(matchstr(currentLine,'\v^SNIP')))
-         echom "Not a Snippet"
+     echom currentLine
+     if (empty(matchstr(currentLine,'\v^SNIP') . matchstr(currentLine,'\v^COLOR')   . matchstr(currentLine,'\v^SNPTXT')              ))
+         let l:currentLine = l:currentLine
      else
          let l:currentLine = substitute(l:currentLine, '^[A-Z,0-9]*[ ]*',"", "")
          let l:currentLine = substitute(l:currentLine, '^[A-Z,0-9]*[ ]*',"", "")
@@ -118,6 +118,7 @@ function! MyKeyMapperDump(...)
         nnoremap <silent> <buffer> <F8>  :call MyKeyMapperDumpSeek()<cr>
         nnoremap <silent> <buffer> <leader><F8>  :close<cr>
         nnoremap <silent> <buffer> s  :call MyKeyMapperDumpSeek()<cr>
+        " nnoremap <silent> <buffer> C :1<cr>/\v^COLOR<cr>
         let l:nn=1
         let l:ntemp=0
         let l:ntemp2=0
@@ -133,6 +134,8 @@ function! MyKeyMapperDump(...)
           endif
 	endfor
 
+                    call setline(l:nn, "BEGIN!")
+                    let l:nn= l:nn + 1
         let l:ntemp = l:ntemp + 1
         let l:ntemp2 = l:ntemp2 + 1
 	for key in sort(keys(g:MyKeyDict))
