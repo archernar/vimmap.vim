@@ -98,7 +98,7 @@ endfunction
 function! KeyMapperEnterAction()
      let l:currentLine   = getline(".")
      echom currentLine
-     if (empty(matchstr(currentLine,'\v^SNIP') . matchstr(currentLine,'\v^COLOR')   . matchstr(currentLine,'\v^SNPTXT')              ))
+     if (empty(matchstr(currentLine,'\v^SNIP') . matchstr(currentLine,'\v^COLOR')   . matchstr(currentLine,'\v^DOIT')        ))
          let l:currentLine = l:currentLine
      else
          let l:currentLine = substitute(l:currentLine, '^[A-Z,0-9]*[ ]*',"", "")
