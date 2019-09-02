@@ -46,6 +46,14 @@ function! g:MyCommandMapper(...)
      let g:MyKeyDictCT = g:MyKeyDictCT + 1
      execute a:1
 endfunction
+function! g:MyCommandNoMap(...)
+     let l:szCommand = substitute(a:1, "command! ", "", "")
+     let l:szCommand = substitute(l:szCommand, '^[A-Z,0-9]*[ ]*',"", "")
+     let l:szKey     = substitute(a:1, "command! ", "", "")
+     let l:szKey     = substitute(l:szKey, " .*$", "", "g")
+     let g:MyKeyDict[g:GetMyKeyMapperMode() . l:szKey] = l:szCommand 
+     let g:MyKeyDictCT = g:MyKeyDictCT + 1
+endfunction
 function! g:MyStaticMapper(...)
      let g:MyKeyDict[g:GetMyKeyMapperMode() . a:1] = a:2
      let g:MyKeyDictCT         = g:MyKeyDictCT +1
