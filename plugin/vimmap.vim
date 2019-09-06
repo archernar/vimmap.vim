@@ -24,6 +24,12 @@ function! g:GetMyKeyMapperMode(...)
     return s:Trim(g:MyKeyMapperMode) . " "
 endfunction
 
+function! g:MyCommandItemMapper(...)
+     let l:szKey = "ITEM" . g:MyCommandItemCT 
+     let g:MyCommandItemDict[ l:szKey ] = a:1
+     let g:MyCommandItemCT = g:MyCommandItemCT +1
+endfunction
+
 function! g:MyKeyMapper(...)
      let l:szKey = substitute(a:1,     "<silent> ", "", "")
      let l:szKey = substitute(l:szKey, "nnoremap ", "", "")
@@ -106,7 +112,7 @@ endfunction
 function! KeyMapperEnterAction()
      let l:currentLine   = getline(".")
      echom currentLine
-     if (empty(matchstr(currentLine,'\v^SNIP') . matchstr(currentLine,'\v^COLOR')   . matchstr(currentLine,'\v^DOIT')        ))
+     if (empty(matchstr(currentLine,'\v^SNIP') . matchstr(currentLine,'\v^COLOR')   . matchstr(currentLine,'\v^DOIT') . matchstr(currentLine,'\v^FILE')     ))
          let l:currentLine = l:currentLine
      else
          let l:currentLine = substitute(l:currentLine, '^[A-Z,0-9]*[ ]*',"", "")
@@ -125,6 +131,24 @@ function! MyKeyMapperEmpty(...)
     endfor
 endfunction
 
+function! MyDictionaryDump(...)
+        call LeftWindowBuffer(":call KeyMapperEnterAction()<cr>")
+        setlocal cursorline
+        nnoremap <silent> <buffer> q :close<cr>
+        let l:nn=1
+        call setline(l:nn, "BEGIN!")
+        let l:nn= l:nn + 1
+	for key in sort(keys(a:1))
+          let l:sz      = a:1[key]
+          call setline(l:nn, l:sz . "")
+          let l:nn= l:nn + 1
+	endfor
+        wincmd H
+        vertical resize 100 
+        set nowrap
+        setlocal readonly nomodifiable
+        echom ""
+endfunction
 
 function! MyKeyMapperDump(...)
         
