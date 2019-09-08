@@ -146,7 +146,6 @@ function! MyDictionaryDump(...)
         wincmd H
         vertical resize 100 
         set nowrap
-        setlocal readonly nomodifiable
         echom ""
 endfunction
 
