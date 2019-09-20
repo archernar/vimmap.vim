@@ -118,9 +118,12 @@ function! KeyMapperEnterAction()
          let l:currentLine = substitute(l:currentLine, '^[A-Z,0-9]*[ ]*',"", "")
          let l:currentLine = substitute(l:currentLine, '^[A-Z,0-9]*[ ]*',"", "")
          let l:currentLine = substitute(l:currentLine, '^[ ]*',"", "")
+         let l:currentLine = substitute(l:currentLine, '\v^.*:',":", "")
          let l:currentLine = substitute(l:currentLine, '^:',"", "")
-         silent execute "q"
-         silent execute l:currentLine
+         if (strlen(l:currentLine) > 0)
+             silent execute "q"
+             silent execute l:currentLine
+         endif
          " execute "redraw!"
      endif
 endfunction
