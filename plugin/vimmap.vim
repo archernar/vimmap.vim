@@ -30,6 +30,11 @@ function! g:MyCommandItemMapper(...)
      let g:MyCommandItemCT = g:MyCommandItemCT +1
 endfunction
 
+function! g:MyCommandItemMapperReset()
+    let g:MyCommandItemDict = {} 
+    let g:MyCommandItemCT = 1000 
+endfunction
+
 function! g:MyKeyMapper(...)
      let l:szKey = substitute(a:1,     "<silent> ", "", "")
      let l:szKey = substitute(l:szKey, "nnoremap ", "", "")
@@ -115,9 +120,9 @@ function! KeyMapperEnterAction()
      if (empty(matchstr(currentLine,'\v^SNIP') . matchstr(currentLine,'\v^COLOR')   . matchstr(currentLine,'\v^DOIT') . matchstr(currentLine,'\v^FILE')     ))
          let l:currentLine = l:currentLine
      else
-         let l:currentLine = substitute(l:currentLine, '^[A-Z,0-9]*[ ]*',"", "")
-         let l:currentLine = substitute(l:currentLine, '^[A-Z,0-9]*[ ]*',"", "")
-         let l:currentLine = substitute(l:currentLine, '^[ ]*',"", "")
+"          let l:currentLine = substitute(l:currentLine, '^[A-Z,0-9]*[ ]*',"", "")
+"          let l:currentLine = substitute(l:currentLine, '^[A-Z,0-9]*[ ]*',"", "")
+"          let l:currentLine = substitute(l:currentLine, '^[ ]*',"", "")
          let l:currentLine = substitute(l:currentLine, '\v^.*:',":", "")
          let l:currentLine = substitute(l:currentLine, '^:',"", "")
          if (strlen(l:currentLine) > 0)
