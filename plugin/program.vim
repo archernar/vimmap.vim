@@ -100,6 +100,8 @@ function! JavaRun(...)
 		silent execute "!print '+'"
                 silent execute "!ls *.java    | gawk -f /usr/local/tools/fourcol.awk"
 		silent execute "!print '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'"
+                silent execute "!cat " . expand("%:p") 
+		silent execute "!print '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'"
                 execute "!" . g:JAVARUN . " " . arg  . " | tee out"
         endif
 endfunction
