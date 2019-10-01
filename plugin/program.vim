@@ -98,7 +98,10 @@ function! JavaRun(...)
 		silent execute "!print '+'"
                 silent execute "!ls ~/classes | gawk '{printf("%-26s ",$1);if ((NR%4)==0) printf("\n"); }END {if ((NR%4)!=0) printf("\n");}'"
 		silent execute "!print '+'"
+
                 silent execute "!ls *.java    | gawk -f /usr/local/tools/fourcol.awk"
+                let sz="SOURCE CODE"
+		silent execute "!print '" . sz . repeat('+', 40 - len(sz) ) "' | tee out" 
 		silent execute "!print 'SOURCE CODE++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++' | tee out" 
                 silent execute "!cat " . expand("%:p") . " | tee -a out" 
 		silent execute "!print 'RUN++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++' | tee -a out"
