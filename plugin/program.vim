@@ -100,10 +100,10 @@ function! JavaRun(...)
 		silent execute "!print '+'"
                 silent execute "!ls *.java    | gawk -f /usr/local/tools/fourcol.awk"
                 let sz="SOURCE CODE"
-		silent execute "!print '" . sz . repeat('+', 66 - len(sz) ) "' | tee out" 
+		silent execute "!print '" . sz . repeat('+', 80 - len(sz) ) "' | tee out" 
                 silent execute "!cat " . expand("%:p") . " | tee -a out" 
                 let sz="RUN"
-		silent execute "!print '" . sz . repeat('+', 66 - len(sz) ) "' | tee -a out" 
+		silent execute "!print '" . sz . repeat('+', 80 - len(sz) ) "' | tee -a out" 
                 execute "!" . g:JAVARUN . " " . arg  . " | tee -a out"
         endif
 endfunction
