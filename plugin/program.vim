@@ -104,6 +104,7 @@ function! JavaRun(...)
                 silent execute "!cat " . expand("%:p") . " | tee -a out" 
                 let sz="RUN"
 		silent execute "!print '" . sz . repeat('+', 80 - len(sz) ) "' | tee -a out" 
+		silent execute "!java -version 2>&1 >/dev/null | grep Environment | tee -a out"
                 execute "!" . g:JAVARUN . " " . arg  . " | tee -a out"
         endif
 endfunction
