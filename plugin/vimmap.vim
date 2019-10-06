@@ -141,7 +141,7 @@ endfunction
 
 "          nnoremap <silent><buffer> p :r !ps -ef<cr>
 let g:gOtate = -1 
-function! Otate()
+function! g:Otate()
      let g:gOtate = g:Otate + 1
      if (g:gOtate > 2)
          g:Otate = 0
@@ -160,6 +160,7 @@ endfunction
 
 function! MyDictionaryDump(...)
         call LeftWindowBuffer(":call KeyMapperEnterAction()<cr>")
+        nnoremap <silent><buffer> o :call g:Otate()<cr>
         setlocal cursorline
         nnoremap <silent> <buffer> q :close<cr>
         let l:nn=1
