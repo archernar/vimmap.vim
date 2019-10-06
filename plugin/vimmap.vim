@@ -144,7 +144,7 @@ let g:gOtate = -1
 function! g:Otate()
      let g:gOtate = g:gOtate + 1
      if (g:gOtate > 2)
-         g:gOtate = 0
+         let g:gOtate = 0
      endif
      if (g:gOtate == 0)
          nnoremap <silent><buffer> o :call g:setupsniplocal("./*.obj")<cr>:call MyDictionaryDump(g:MyCommandItemDict)<cr>
