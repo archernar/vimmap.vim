@@ -143,10 +143,9 @@ endfunction
 let g:gOtate = -1 
 function! g:Otate()
      let g:gOtate = g:gOtate + 1
-     if (g:gOtate > 2)
+     if (g:gOtate > 4)
          let g:gOtate = 0
      endif
-     echom g:gOtate
      if (g:gOtate == 0)
          call g:setupsniplocal("./*.obj")
      endif
@@ -155,6 +154,12 @@ function! g:Otate()
      endif
      if (g:gOtate == 2)
          call g:setupsniplocal("./*.txt")
+     endif
+     if (g:gOtate == 3)
+         call g:setupsniplocal("./*.csv")
+     endif
+     if (g:gOtate == 4)
+         call g:setupsniplocal("./*.py")
      endif
      call MyDictionaryDump(g:MyCommandItemDict)
 endfunction
