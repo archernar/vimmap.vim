@@ -139,10 +139,15 @@ function! MyKeyMapperEmpty(...)
     endfor
 endfunction
 
+"              nnoremap <silent><buffer> o :call g:setupsniplocal("./*.obj")<cr>:call MyDictionaryDump(g:MyCommandItemDict)<cr>
+"              nnoremap <silent><buffer> j :call g:setupsniplocal("./*.java")<cr>:call MyDictionaryDump(g:MyCommandItemDict)<cr>
+"              nnoremap <silent><buffer> t :call g:setupsniplocal("./*.txt")<cr>:call MyDictionaryDump(g:MyCommandItemDict)<cr>
+"              nnoremap <silent><buffer> p :r !ps -ef<cr>
 function! MyDictionaryDump(...)
         call LeftWindowBuffer(":call KeyMapperEnterAction()<cr>")
         setlocal cursorline
         nnoremap <silent> <buffer> q :close<cr>
+        nnoremap <silent> <buffer> <esc> :close<cr>
         let l:nn=1
         call setline(l:nn, "BEGIN!")
         let l:nn= l:nn + 1
