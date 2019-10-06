@@ -146,15 +146,17 @@ function! g:Otate()
      if (g:gOtate > 2)
          let g:gOtate = 0
      endif
+     echmo gOtate
      if (g:gOtate == 0)
-         nnoremap <silent><buffer> o :call g:setupsniplocal("./*.obj")<cr>:call MyDictionaryDump(g:MyCommandItemDict)<cr>
+         call g:setupsniplocal("./*.obj")
      endif
      if (g:gOtate == 1)
-         nnoremap <silent><buffer> j :call g:setupsniplocal("./*.java")<cr>:call MyDictionaryDump(g:MyCommandItemDict)<cr>
+         call g:setupsniplocal("./*.java")
      endif
      if (g:gOtate == 2)
-         nnoremap <silent><buffer> t :call g:setupsniplocal("./*.txt")<cr>:call MyDictionaryDump(g:MyCommandItemDict)<cr>
+         call g:setupsniplocal("./*.txt")
      endif
+     call MyDictionaryDump(g:MyCommandItemDict)<cr>
 endfunction
 
 
