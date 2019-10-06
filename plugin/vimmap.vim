@@ -146,7 +146,7 @@ function! g:Otate()
      if (g:gOtate > 2)
          let g:gOtate = 0
      endif
-     echmo gOtate
+     echom gOtate
      if (g:gOtate == 0)
          call g:setupsniplocal("./*.obj")
      endif
