@@ -146,7 +146,7 @@ function! g:Otate()
      if (g:gOtate > 2)
          let g:gOtate = 0
      endif
-     echom gOtate
+     echom g:gOtate
      if (g:gOtate == 0)
          call g:setupsniplocal("./*.obj")
      endif
@@ -156,7 +156,7 @@ function! g:Otate()
      if (g:gOtate == 2)
          call g:setupsniplocal("./*.txt")
      endif
-     call MyDictionaryDump(g:MyCommandItemDict)<cr>
+     call MyDictionaryDump(g:MyCommandItemDict)
 endfunction
 
 
