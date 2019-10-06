@@ -142,9 +142,9 @@ endfunction
 "          nnoremap <silent><buffer> p :r !ps -ef<cr>
 let g:gOtate = -1 
 function! g:Otate()
-     let g:gOtate = g:Otate + 1
+     let g:gOtate = g:gOtate + 1
      if (g:gOtate > 2)
-         g:Otate = 0
+         g:gOtate = 0
      endif
      if (g:gOtate == 0)
          nnoremap <silent><buffer> o :call g:setupsniplocal("./*.obj")<cr>:call MyDictionaryDump(g:MyCommandItemDict)<cr>
