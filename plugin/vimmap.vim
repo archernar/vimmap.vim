@@ -147,7 +147,6 @@ function! MyDictionaryDump(...)
         call LeftWindowBuffer(":call KeyMapperEnterAction()<cr>")
         setlocal cursorline
         nnoremap <silent> <buffer> q :close<cr>
-        nnoremap <silent> <buffer> <esc> :close<cr>
         let l:nn=1
         call setline(l:nn, "BEGIN!")
         let l:nn= l:nn + 1
