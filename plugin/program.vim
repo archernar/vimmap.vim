@@ -11,8 +11,8 @@ endfunction
 function! JavaLocal(...)
     silent let l:n = 0
     silent set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
-    silent let g:JAVACOMPILE="javac -nowarn -cp ~/classes -d ~/classes " . shellescape(expand('%:p'))
     silent let g:JAVACOMPILE="javac -nowarn -cp . -d . " . shellescape(expand('%:p'))
+    silent let g:JAVACOMPILE="javac -nowarn -cp ~/classes -d ~/classes " . shellescape(expand('%:p'))
     silent let g:JAVARUN =   "java  -d64  " . "" . g:strreplace(expand("%:r"),"./","")
     silent call BiModeSet(1)
 endfunction
